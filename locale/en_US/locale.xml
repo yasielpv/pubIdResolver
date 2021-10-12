@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "./././././lib/pkp/dtd/locale.dtd">
+
+<!--
+  * plugins/gateway/pubIdResolver/locale/en_US/locale.xml
+  *
+  * Copyright (c) 2021 Yasiel Perez Vera
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  * pubIdResolver plugin localization messages
+  -->
+
+<locale key="en_US" full.key="U.S. English">
+    <message key="plugins.gateways.pubIdResolver.displayName">PubId Resolver Plugin</message>
+    <message key="plugins.gateways.pubIdResolver.description">This plugin resolves issues, articles and galleys based on public identifier information.</message>
+	<message key="plugins.gateways.pubIdResolver.errors.errorMessage">Unable to resolve a single entity using the specified public identifier information. Please ensure that the public identifier is comprehensive and refers to an entity in this deployment of OJS.</message>
+</locale>

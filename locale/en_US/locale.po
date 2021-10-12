@@ -1,0 +1,21 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-10-10T06:56:39-07:00\n"
+"PO-Revision-Date: 2021-10-10T06:56:39-07:00\n"
+"Language: \n"
+
+msgid "plugins.gateways.pubIdResolver.displayName"
+msgstr "PubId Resolver Plugin"
+
+msgid "plugins.gateways.pubIdResolver.description"
+msgstr "This plugin resolves issues, articles and galleys based on public identifier information."
+
+msgid "plugins.gateways.pubIdResolver.errors.errorMessage"
+msgstr "Unable to resolve a single entity using the specified public identifier information. Please ensure that the public identifier is comprehensive and refers to an entity in this deployment of OJS."
