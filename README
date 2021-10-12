@@ -10,7 +10,7 @@ at the following URL pattern:
 http://localhost/ojs/index.php/myJournal/gateway/plugin/pubIdResolver/...
 
 ...where, of course, localhost is the local server name, ojs is the path
-to the OJS 2.x installation, and myJournal is the path to a particular
+to the OJS 3.x installation, and myJournal is the path to a particular
 journal.
 
 The plugin must be enabled in order to respond to requests. To enable the
@@ -29,5 +29,5 @@ http://.../[ark]
 ...where [doi], [urn], [purl], and [ark] are string identifying the
 public identifier of the desired content.
 
-This plugin ships with current releases of OJS 2.x and the PKP support
+This plugin ships with current releases of OJS 3.x and the PKP support
 team may be contacted for more information. See docs/README.md.
