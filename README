@@ -1,9 +1,9 @@
 	=================================
-	=== Pub Ids Resolver Gateway Plugin
+	=== Pub Id Resolver Gateway Plugin
 	=================================
 
 
-The Pub Ids Resolver gateway plugin resolves individual articles, issues and galleys in the OJS
+The Pub Id Resolver gateway plugin resolves individual articles, issues and galleys in the OJS
 installation using the supplied public id register in OJS. It can be addressed
 at the following URL pattern:
 
@@ -27,7 +27,31 @@ http://.../[purl]
 http://.../[ark]
 
 ...where [doi], [urn], [purl], and [ark] are string identifying the
-public identifier of the desired content.
+public identifier of the desired content. For example:
 
+ARK:
+http://localhost/ojs/index.php/myJournal/gateway/plugin/pubIdResolver/ark:/12345/fk12345
+
+DOI:
+http://localhost/ojs/index.php/myJournal/gateway/plugin/pubIdResolver/10.12345/fk12345
+
+Also, It can obtain the element metadata using the format ERC adding question marks at the end of the persistent identifier.
+ERC format includes the metadata who, what, when, where, how and target. Who is the creator of the item, 
+What is the name of the item, When is the publication date of the item, Where is the persistent URL of the item, 
+How is the format of the item and Target is the final URL of the item that is appointed from the Where field. For example:
+
+http://localhost/ojs/index.php/myJournal/gateway/plugin/pubIdResolver/ark:/12345/fk12345?
+
+obtaining this response:
+
+
+erc:  
+who: LAST NAME AUTHOR 1, FIRST NAME AUTHOR 1; LAST NAME AUTHOR 2, FIRST NAME AUTHOR 2
+what: TITLE
+when: DATE
+where: ark:/12345/fk12345 (https://n2t.net/ark:/12345/fk12345)
+how: (:mtype text) article
+_t: http://localhost/myJournal/article/view/45
+ 
 This plugin ships with current releases of OJS 3.x and the PKP support
 team may be contacted for more information. See docs/README.md.

@@ -12,7 +12,7 @@ msgstr ""
 "Language: \n"
 
 msgid "plugins.gateways.pubIdResolver.displayName"
-msgstr "PubId Resolver Plugin"
+msgstr "Pub Id Resolver Plugin"
 
 msgid "plugins.gateways.pubIdResolver.description"
 msgstr "This plugin resolves issues, articles and galleys based on public identifier information."

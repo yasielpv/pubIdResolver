@@ -7,7 +7,7 @@
 /**
  * @file plugins/gateways/pubIdResolver/index.php
  *
- * Copyright (c) 2021 Yasiel Perez Vera
+ * Copyright (c) 2021 Yasiel Pérez Vera
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @ingroup plugins_gateways_pubidresolver

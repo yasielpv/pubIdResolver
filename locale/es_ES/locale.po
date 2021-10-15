@@ -12,7 +12,7 @@ msgstr ""
 "Language: \n"
 
 msgid "plugins.gateways.pubIdResolver.displayName"
-msgstr "Módulo PubId Resolver"
+msgstr "Módulo Pub Id Resolver"
 
 msgid "plugins.gateways.pubIdResolver.description"
 msgstr "Este módulo obtiene números, artículos y galeradas basado en los identificadores persistentes registardos en la plataforma OJS."
