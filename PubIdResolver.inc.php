@@ -3,13 +3,13 @@
 /**
  * @file plugins/gateways/pubIdResolver/PubIdResolver.inc.php
  *
- * Copyright (c) 2021 Yasiel Pérez Vera
+ * Copyright (c) 2021 Yasiel Perez Vera
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class PubIdResolver
  * @ingroup plugins_gateways_pubidresolver
  *
- * @brief Simple Pub id resolver gateway plugin
+ * @brief Simple pub ids resolver gateway plugin
  */
 
 import('lib.pkp.classes.plugins.GatewayPlugin');
@@ -82,7 +82,7 @@ class PubIdResolver extends GatewayPlugin {
 				$resolvingURL = $pubIdPlugin->getResolvingURL($journalId, $pubId);
 				$articleURL = $request->url($journal->getPath(), 'article', 'view', $article->getBestArticleId());
 				if ($exportInfo) $this->createArticleERC($article, $pubIdType, $resolvingURL, $articleURL);
-				$request->redirect(null, 'article', 'view', $article->getBestArticleId());
+				$request->redirectUrl($articleURL);
 				break;
 			}
 			else {
@@ -92,7 +92,7 @@ class PubIdResolver extends GatewayPlugin {
 					$resolvingURL = $pubIdPlugin->getResolvingURL($journalId, $pubId);
 					$issueURL = $request->url($journal->getPath(), 'issue', 'view', $issue->getBestIssueId());
 					if ($exportInfo) $this->createIssueERC($issue, $pubIdType, $resolvingURL, $journal->getLocalizedName(), $issueURL);
-					$request->redirect(null, 'issue', 'view', $issue->getBestIssueId());
+					$request->redirectUrl($issueURL);
 					break;
 				}
 				else {
@@ -102,7 +102,7 @@ class PubIdResolver extends GatewayPlugin {
 						$resolvingURL = $pubIdPlugin->getResolvingURL($journalId, $pubId);
 						$galleyURL = $request->url($journal->getPath(), 'article', 'view', [$publicationId, $submissionGalley->getBestGalleyId()]);
 						if ($exportInfo) $this->createGalleyERC($submissionGalley, $pubIdType, $resolvingURL, $galleyURL, $journal->getLocalizedName());
-						$request->redirect(null, 'article', 'view',[$publicationId, $submissionGalley->getBestGalleyId()]);
+						$request->redirectUrl($galleyURL);
 						break;
 					}
 				}
@@ -119,15 +119,21 @@ class PubIdResolver extends GatewayPlugin {
 	}
 	
 	function exportInfo($who, $what, $when, $where, $how, $target) {
-		if (empty(strip_tags(trim($who)))) $who = "(:unkn) Anonymous";
-		if (empty(strip_tags(trim($what)))) $what = "(:unas) Untitled";
-		if (empty(strip_tags(trim($when)))) $when = "(:unav) Undated";
-		if (empty(strip_tags(trim($where)))) $where = "(:none) Unidentified";
-		if (empty(strip_tags(trim($how)))) $how = "(:unav) Untyped";
-		if (empty(strip_tags(trim($target)))) $target = "(:unav) Untarget";
+		$who = strip_tags(trim($who));
+		$what = strip_tags(trim($what));
+		$when = strip_tags(trim($when));
+		$where = strip_tags(trim($where));
+		$how = strip_tags(trim($how));
+		$target = strip_tags(trim($target));
+		if (empty($who)) $who = "(:unkn) Anonymous";
+		if (empty($what)) $what = "(:unas) Untitled";
+		if (empty($when)) $when = "(:unav) Undated";
+		if (empty($where)) $where = "(:none) Unidentified";
+		if (empty($how)) $how = "(:unav) Untyped";
+		if (empty($target)) $target = "(:unav) Untarget";
 		
 		header('HTTP/1.0 200 OK');
-		header('Content-Type: text/plain; charset=UTF-8');
+		header('Content-Type: text/anvl; charset=UTF-8');
 		
 		print_r("erc:  
 who: $who
