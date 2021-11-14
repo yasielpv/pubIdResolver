@@ -62,23 +62,25 @@ class PubIdResolver extends GatewayPlugin {
 		$pubId = implode('/', $args);
 		$pubIdPlugins = (array) PluginRegistry::loadCategory('pubIds', true, $journalId);
 		$exportInfo = substr($_SERVER['REQUEST_URI'],-1) == "?";
-        foreach ($pubIdPlugins as $pubIdPlugin) {
+        $DAOs = DAORegistry::getDAOs();
+		$issueDAO = $DAOs['IssueDAO'];
+		$articleGalleyDAO = $DAOs['ArticleGalleyDAO'];
+		
+		foreach ($pubIdPlugins as $pubIdPlugin) {
 			$pubIdType = $pubIdPlugin->getPubIdType();
 			
-			$DAOs = DAORegistry::getDAOs();
-			$issueDAO = $DAOs['IssueDAO'];
-			$articleGalleyDAO = $DAOs['ArticleGalleyDAO'];
 			$article = false;
-			
 			if (array_key_exists('SubmissionDAO', $DAOs)){
 				$submissionDAO = $DAOs['SubmissionDAO'];
 				$article = $submissionDAO->getByPubId($pubIdType, $pubId, $journalId);
 			}
-			if (array_key_exists('PublishedArticleDAO', $DAOs)){
+			else if (array_key_exists('PublishedArticleDAO', $DAOs)){
 				$publishedArticleDAO = $DAOs['PublishedArticleDAO'];
 				$article = $publishedArticleDAO->getPublishedArticleByPubId($pubIdType, $pubId, $journalId);
-			}		
+			}
+			
 			if($article) {
+				if ($article->getStatus() != STATUS_PUBLISHED) break;
 				$resolvingURL = $pubIdPlugin->getResolvingURL($journalId, $pubId);
 				$articleURL = $request->url($journal->getPath(), 'article', 'view', $article->getBestArticleId());
 				if ($exportInfo) $this->createArticleERC($article, $pubIdType, $resolvingURL, $articleURL);
@@ -89,6 +91,7 @@ class PubIdResolver extends GatewayPlugin {
 				$issue = $issueDAO->getByPubId($pubIdType, $pubId, $journalId);				
 				if($issue)
 				{
+					if($issue->getPublished() != true) break;
 					$resolvingURL = $pubIdPlugin->getResolvingURL($journalId, $pubId);
 					$issueURL = $request->url($journal->getPath(), 'issue', 'view', $issue->getBestIssueId());
 					if ($exportInfo) $this->createIssueERC($issue, $pubIdType, $resolvingURL, $journal->getLocalizedName(), $issueURL);
